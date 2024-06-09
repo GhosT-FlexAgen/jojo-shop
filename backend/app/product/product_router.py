@@ -1,11 +1,10 @@
 from fastapi import APIRouter, Depends, Response
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
-from dto.productschema import ProductSchema
+from schemas.product import ProductSchema
 from config.database import get_db
-import csv
 
-from .productservice import ProductService
+from .product_service import ProductService
 
 router = APIRouter(prefix="/product", tags=["Products"])
 

@@ -6,5 +6,5 @@ class RegisterUser(BaseModel):
     name: str
     email: str
     password: str
-    is_staff: Optional[bool]
+    role: Optional[str] = "user"
     is_active: Optional[bool]

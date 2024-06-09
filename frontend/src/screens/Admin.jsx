@@ -6,22 +6,18 @@ export default function AdminScreen() {
   const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 
   useEffect(() => {
-    console.log('currentUser:', currentUser);
     if (currentUser) {
-      console.log('is_staff:', currentUser.is_staff);
-      if (!currentUser.is_staff) {
-        console.log('Redirecting to home screen');
+      if (currentUser.role !== "admin" && currentUser.role !== "manager") {
         window.location.href = '/';
       }
     } else {
-      console.log('Redirecting to home screen');
       window.location.href = '/';
     }
   }, []);
 
   return (
       <div className="mt-3">
-          {!currentUser || !currentUser.is_staff ? (
+          {!currentUser || (currentUser.role !== "admin" && currentUser.role !== "manager") ? (
               <HomeScreen/>
           ) : (
           <div className="flex justify-center">
@@ -30,6 +26,7 @@ export default function AdminScreen() {
                 Панель администратора
               </h2>
               <ul className="admin p-2 bg-gray-100 rounded flex space-x-2">
+                { (currentUser.role === "admin") ?
                 <li>
                   <Link
                     to="/admin/userslist"
@@ -38,6 +35,8 @@ export default function AdminScreen() {
                     Пользователи
                   </Link>
                 </li>
+                : ""
+                }
                 <li>
                   <Link
                     to="/admin/productslist"

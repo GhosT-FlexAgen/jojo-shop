@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from config.token import create_access_token
 
 from config.database import get_db
-from models.usermodels import User
+from models.user_models import User
 
 from config.hashing import Hashing
 
@@ -32,7 +32,7 @@ def login(
         "id": user.id,
         "name": user.name,
         "email": user.email,
-        "is_staff": user.is_staff,
+        "role": user.role,
         "is_active": user.is_active,
         "jwtToken": access_token,
     }

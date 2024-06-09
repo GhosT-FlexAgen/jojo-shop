@@ -10,7 +10,7 @@ class User(Base):
     name = Column(String)
     email = Column(String)
     password = Column(String)
-    is_staff = Column(Boolean, default=False)
+    role = Column(String, default="user")
     is_active = Column(Boolean, default=False)
 
     reviews = relationship("ReviewModel", back_populates="user")

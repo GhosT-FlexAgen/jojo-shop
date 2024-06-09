@@ -1,14 +1,11 @@
 from sqlalchemy.orm.session import Session
-from config.database import get_db
-from models.productmodels import ProductModel, ReviewModel
-from dto.productschema import ProductSchema
-from config.hashing import Hashing
-from sklearn.metrics.pairwise import linear_kernel
+from models.product_models import ProductModel
+from models.review_models import ReviewModel
+from schemas.product import ProductSchema
 from sklearn.neighbors import NearestNeighbors
 import nltk
 import pandas as pd
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
-
 
 
 nltk.download('vader_lexicon')
@@ -73,7 +70,6 @@ class ProductService:
 
     @staticmethod
     def create_product(request: ProductSchema, db: Session):
-        print(request)
         new_product = ProductModel(
             name=request.name,
             image=request.image,
@@ -132,7 +128,6 @@ class ProductService:
 
     @staticmethod
     def update_product(productid: int, request: ProductSchema, db: Session):
-        print(productid, request)
         product_id = db.query(ProductModel).filter(ProductModel.id == productid).first()
         product_id.name = request.name
         product_id.image = request.image

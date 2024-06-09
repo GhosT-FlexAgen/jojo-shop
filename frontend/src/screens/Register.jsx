@@ -26,7 +26,7 @@ export default function RegisterScreen() {
       name: name,
       email: email,
       password: password,
-      is_staff: false,
+      role: 'user',
       is_active: true
     };
 

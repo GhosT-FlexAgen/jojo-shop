@@ -128,7 +128,15 @@ export default function Navbar() {
                     </ul>
                   </div>
                 </li>
-              </>
+              <li>
+              <Link
+                to="/cart"
+                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
+              >
+                <i className="fas fa-shopping-cart"></i> {cartItems.length}
+              </Link>
+            </li>
+            </>
             ) : (
               <li>
                 <Link
@@ -139,14 +147,6 @@ export default function Navbar() {
                 </Link>
               </li>
             )}
-            <li>
-              <Link
-                to="/cart"
-                className="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0"
-              >
-                <i className="fas fa-shopping-cart"></i> {cartItems.length}
-              </Link>
-            </li>
           </ul>
         </div>
       </div>

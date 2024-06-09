@@ -3,13 +3,15 @@ from jwt import PyJWTError
 import jwt
 from sqlalchemy.orm import Session
 from config.database import get_db
-from users.usersservice import UserService
+from users.users_service import UserService
 from fastapi.security import OAuth2PasswordBearer
 from fastapi import Depends, HTTPException, status
+from .config import settings
+
 
 SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
 
@@ -49,4 +51,3 @@ def get_currentUser(db: Session = Depends(get_db), data: str = Depends(oauth2_sc
     )
 
     return verify_token(token=data, credentials_exception=credentials_exception, db=db)
-

@@ -1,11 +1,6 @@
 from sqlalchemy import Column, DateTime, Integer, String
 from sqlalchemy.orm import relationship
-from sqlalchemy.sql.schema import ForeignKey
 from config.database import Base
-from datetime import datetime
-from .reviewmodels import ReviewModel
-
-
 
 
 class ProductModel(Base):

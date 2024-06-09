@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loginUser } from '../redux/user.slice';
+import {loginUser, logoutUser} from '../redux/user.slice';
 import Error from '../components/Error';
 import Loader from '../components/Loader';
 
@@ -22,7 +22,6 @@ export default function LoginScreen() {
     formData.append('password', password);
 
     dispatch(loginUser(formData));
-    navigate('/');
   };
 
   useEffect(() => {
@@ -38,7 +37,7 @@ export default function LoginScreen() {
           <h2 className="text-center text-2xl font-semibold mb-6">ВОЙТИ</h2>
           <i className="fa fa-sign-in text-3xl mb-6 mx-auto"></i>
 
-          {error && <Error error="Invalid Credentials" />}
+          {error && <Error error="Проверьте коректность введённых данных. Также возможно Ваша учётная запись заблокирована." />}
           {loading && <Loader />}
 
           <form onSubmit={login}>

@@ -33,8 +33,8 @@ function App() {
           <Route path="/orderinfo/:orderid" element={<OrderInfo />} />
           <Route path="/profile" element={<ProfileScreen />} />
           <Route path="/admin" element={<AdminScreen />}>
-            <Route index element={<UsersList />} />
-            <Route path="productslist" element={<ProductList />} />
+            <Route index element={<ProductList />} />
+            <Route path="productslist"  element={<ProductList />} />
             <Route path="userslist" element={<UsersList />} />
             <Route path="addnewproduct" element={<AddProduct />} />
             <Route path="editproduct/:id" element={<EditProduct />} />

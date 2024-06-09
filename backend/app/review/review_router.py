@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from config.database import get_db
-from models.usermodels import User
-from dto.reviewschema import ReviewCreate
+from models.user_models import User
+from schemas.review import ReviewCreate
 from config.token import get_currentUser
-from .reviewservice import ReviewService
+from .review_service import ReviewService
 
 router = APIRouter(prefix="/review", tags=["Review"])
 

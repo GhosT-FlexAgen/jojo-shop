@@ -15,6 +15,7 @@ export default function OrderInfo() {
 
   useEffect(() => {
     dispatch(getOrderById(orderid));
+    console.log(order);
   }, [dispatch]);
 
   return (

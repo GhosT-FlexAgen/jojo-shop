@@ -25,7 +25,7 @@ class CurrentUserSchema(BaseModel):
     id: int
     name: str
     email: str
-    is_staff: bool
+    role: str
     is_active: bool
 
 

@@ -19,7 +19,7 @@ export default function Checkout({ amount }) {
     id: data.id,
     name: data.name,
     email: data.email,
-    is_staff: data.is_staff,
+    role: data.role,
     is_active: data.is_active
   }
 

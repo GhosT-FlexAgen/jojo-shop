@@ -19,10 +19,11 @@ export const loginUser = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const response = await axios.post('/api/login', user);
-
-    
-      localStorage.setItem('currentUser', JSON.stringify(response.data));
-      return response.data;
+      if (response.data.is_active) {
+         localStorage.setItem('currentUser', JSON.stringify(response.data));
+         return response.data;
+      }
+      return rejectWithValue("Учётная запись заблокирована");
     } catch (error) {
       return rejectWithValue(error.response.data);
     }
@@ -211,28 +212,6 @@ export const deleteUserSlice = createSlice({
       });
   },
 });
-
-// export const {
-//   registerNewUserSuccess,
-//   loginUserSuccess,
-//   logoutUserSuccess,
-//   updateUserSuccess,
-//   getAllUsersSuccess,
-//   deleteUserSuccess,
-// } = {
-//   registerNewUserSuccess: registerUserSlice.actions,
-//   loginUserSuccess: loginSlice.actions,
-//   logoutUserSuccess: loginSlice.actions,
-//   updateUserSuccess: updateSlice.actions,
-//   getAllUsersSuccess: getAllUsersSlice.actions,
-//   deleteUserSuccess: deleteUserSlice.actions,
-// };
-
-// export const selectRegisterUser = (state) => state.registerUser;
-// export const selectLogin = (state) => state.login;
-// export const selectUpdate = (state) => state.update;
-// export const selectAllUsers = (state) => state.getAllUsers;
-// export const selectDeleteUser = (state) => state.deleteUser;
 
 export default {
   registerUserSlice: registerUserSlice.reducer,

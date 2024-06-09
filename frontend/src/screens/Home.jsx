@@ -24,7 +24,7 @@ export default function HomeScreen() {
 
     useEffect(() => {
         if (currentUser && currentUser.jwtToken) {
-            navigate("/")
+            navigate("/");
         }
     }, [navigate]);
 

@@ -3,9 +3,9 @@ import stripe
 import mail1
 from sqlalchemy.orm import Session
 from fastapi.encoders import jsonable_encoder
-from dto.orderschema import OrderCreatePlaceOrder
-from models.ordermodels import OrderModel, OrderItemsModel, ShippingAddressModel
-from models.usermodels import User
+from schemas.order import OrderCreatePlaceOrder
+from models.order_models import OrderModel, OrderItemsModel, ShippingAddressModel
+from models.user_models import User
 
 from uuid import uuid4
 
@@ -16,10 +16,10 @@ def send_mail(subject, text, recipients):
     mail1.send(subject=subject,
                text=text,
                recipients=recipients,
-               sender='shop@email',
-               username='shop@email',
-               password='shops_email_password',
-               smtp_host='smtp.shops.email')
+               sender='maksim_pavlov_2003@list.ru',
+               username='maksim_pavlov_2003@list.ru',
+               password='imcfS2TfikZw2wdaPJqr',
+               smtp_host='smtp.mail.ru')
 
 
 class OrderService:
@@ -88,7 +88,7 @@ class OrderService:
         db.add(order_create)
         db.commit()
 
-        db_orderid = db.query(OrderModel).filter(OrderModel.user_id == request.currentUser.id).first()
+        db_orderid = db.query(OrderModel).filter(OrderModel.user_id == request.currentUser.id).order_by(OrderModel.id.desc()).first()
 
         shipping_a = ShippingAddressModel(
             address=request.token.card.address_line1,
@@ -110,7 +110,7 @@ class OrderService:
 
         db.commit()
 
-        db_orderid = db.query(User).filter(User.is_staff == True)
+        db_orderid = db.query(User).filter(User.role == "admin")
         for manager in db_orderid:
             try:
                 count = 0
@@ -138,7 +138,6 @@ class OrderService:
 
     def getOrderById(id: int, db: Session):
         order_byid = db.query(OrderModel).filter(OrderModel.id == id).first()
-        # order_byid, orderItembyid = db.query(OrderModel, OrderItemsModel).join(OrderItemsModel, OrderModel.id == OrderItemsModel.order_id).filter(OrderModel.id == id)
 
         orderItembyid = (
             db.query(OrderItemsModel).filter(OrderItemsModel.order_id == id).all()
